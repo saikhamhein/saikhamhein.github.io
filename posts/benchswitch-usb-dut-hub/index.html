@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>BenchSwitch USB DUT Hub · Sai Kham Hein</title><style>@font-face {
+  font-family: "Reading";
+  src: url("../../assets/fonts/LiberationSans-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Note";
+  src: url("../../assets/fonts/LiberationMono-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  color-scheme: dark;
+  --background: #121212;
+  --heading: #e8e8e8;
+  --body: #bfbfbf;
+  --metadata: #9b9b9b;
+  --rule: #343434;
+  --link: #c9c9c9;
+  --underline: #686868;
+  --footer: #808080;
+}
+* { box-sizing: border-box; }
+html { margin: 0; scroll-padding-top: 24px; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--heading);
+  font-family: "Reading", Arial, Helvetica, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--heading); outline-offset: 6px; }
+a:hover { color: #fff; }
+::selection { background: #dedede; color: #121212; }
+.skip-link {
+  position: absolute;
+  top: -80px;
+  left: 24px;
+  z-index: 2;
+  padding: 12px 16px;
+  background: var(--heading);
+  color: var(--background);
+}
+.skip-link:focus { top: 12px; color: var(--background); }
+.site-header {
+  min-height: 100px;
+  margin: 0 auto;
+  max-width: 1232px;
+  width: calc(100% - 208px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.name { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; letter-spacing: .01em; text-decoration: none; }
+.site-header nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font: 10px "Note", "Courier New", monospace;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+main { width: min(688px, calc(100% - 48px)); margin: 86px auto 0; }
+main:focus { outline: none; }
+.meta {
+  font: 10px "Note", "Courier New", monospace;
+  letter-spacing: .09em;
+  color: var(--metadata);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: 46px;
+  font-weight: 400;
+  letter-spacing: -.028em;
+  line-height: 1.13;
+  margin: 0 0 37px;
+}
+h2 { font-size: 25px; font-weight: 400; letter-spacing: -.02em; line-height: 1.25; margin: 40px 0 18px; }
+p { font-size: 19px; line-height: 1.62; margin: 0 0 25px; color: var(--body); }
+.links {
+  margin-top: 42px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 28px;
+  font-size: 13px;
+}
+.links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--underline);
+}
+.links a:hover { color: #fff; text-decoration-color: currentColor; }
+.end {
+  font: 9px "Note", "Courier New", monospace;
+  letter-spacing: .06em;
+  color: var(--footer);
+  margin-top: 39px;
+  margin-bottom: 48px;
+  text-transform: uppercase;
+}
+@media (max-width: 760px) {
+  .site-header { width: calc(100% - 48px); min-height: 79px; }
+  .name { font-size: 12px; }
+  .site-header nav a { font-size: 9px; }
+  main { margin-top: 45px; }
+  .meta { font-size: 9px; margin-bottom: 20px; }
+  h1 { font-size: 34px; margin-bottom: 28px; }
+  h2 { font-size: 22px; margin-top: 34px; margin-bottom: 16px; }
+  p { font-size: 16px; line-height: 1.63; margin-bottom: 23px; }
+  .links { margin-top: 33px; font-size: 12px; }
+  .end { font-size: 8px; margin-top: 27px; margin-bottom: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+@media print {
+  :root { color-scheme: light; --background: #fff; --heading: #111; --body: #222; --metadata: #555; --rule: #bbb; --link: #222; --underline: #666; --footer: #555; }
+  .skip-link, .site-header nav { display: none; }
+  .site-header { min-height: 60px; width: 100%; }
+  main { width: 100%; margin-top: 32px; }
+  p { orphans: 3; widows: 3; }
+}
+
+.project-link{color:var(--link);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--underline);} .project-link:hover{color:#fff;text-decoration-color:currentColor;}
+figure{margin:38px 0 42px;} figure img{display:block;width:100%;height:auto;} .board-picture{background:#fff;padding:20px;} .workflow-picture{max-width:440px;margin:0 auto;} figcaption{font-size:13px;line-height:1.6;color:var(--metadata);margin-top:14px;} .date{font-size:12px;line-height:1.6;color:var(--metadata);margin:0 0 26px;} figure{break-inside:avoid;}
+.subtitle { margin-top:-18px; font-size:21px; line-height:1.5; color:var(--metadata); } @media(max-width:760px){ .subtitle{font-size:18px; margin-top:-10px;} }
+</style></head><body><a class="skip-link" href="#post">Skip to article</a><header class="site-header"><a class="name" href="https://saikhamhein.github.io/">Sai Kham Hein</a><nav aria-label="Main navigation"><a href="https://saikhamhein.github.io/">About</a></nav></header><main id="post" tabindex="-1"><article aria-labelledby="post-title"><div class="meta">Project notes</div><h1 id="post-title">BenchSwitch USB DUT Hub</h1><p class="subtitle">Host-controlled power cycling for development boards</p><p class="date"><time datetime="2026-10-05">5 October 2026</time></p><p>I’m building <a class="project-link" href="https://github.com/saikhamhein/benchswitch-usb-dut-hub">BenchSwitch</a> to power-cycle USB development boards from the host computer. It has four USB 2.0 ports with individual power switching.</p>
+<p>The project came from a recurring step in firmware development: unplugging a board and plugging it back in. I want that operation available to a test script or software agent, alongside building firmware and reading logs.</p>
+<p>The PCB prototype has been ordered. Assembly and bench testing are next.</p>
+<figure><img class="board-picture" src="pcb-assembly.svg" alt="Top-side component placement drawing of the four-port BenchSwitch PCB."><figcaption>Top-side PCB assembly drawing.</figcaption></figure><h2>Host-controlled power cycling</h2>
+<p>DUT means device under test. Each downstream port has its own power-switching circuit. The intended control path uses uhubctl on the host to switch a selected port off and back on.</p>
+<p>For an automated test, the sequence is to request the power cycle, wait for the device to restart and re-enumerate, then collect logs and results. Independent switching allows the test to target one board while leaving the other ports powered.</p>
+<figure><img class="workflow-picture" src="planned-test-loop.svg" alt="Planned loop from a host power-cycle command through BenchSwitch and a DUT restart to collected test results."><figcaption>Planned host-controlled power-cycle sequence.</figcaption></figure><h2>Hardware</h2>
+<p>The hub controller is a Microchip USB2514B. The board takes a regulated 12–24 V DC input and converts it to the supply rails for the hub and USB ports.</p>
+<p>The design targets are 1 A per port and 2 A shared across the four connected DUTs. The PCB is 95 × 80 mm with four copper layers.</p>
+<p>I’m using bare PCBs and separately sourced components for self assembly. The project includes the KiCad design, bill of materials and manufacturing files.</p>
+<h2>Bench testing</h2>
+<p>I’ll start with a current-limited supply and check the power rails and reset sequencing. Dummy loads come next, followed by USB devices.</p>
+<p>The test plan covers individual and simultaneous port switching, voltage under load, board temperature and USB re-enumeration after repeated power cycles. I’ll use those measurements to set the operating limits and develop a repeatable host-controlled test sequence.</p><footer class="article-footer"><nav class="links" aria-label="More from Sai"><a href="https://github.com/saikhamhein/benchswitch-usb-dut-hub">BenchSwitch on GitHub</a><a href="https://saikhamhein.github.io/">About Sai</a></nav><div class="end">Sai Kham Hein</div></footer></article></main></body></html>
