@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="StrideForge project notes: a quadruped leg design, FreeCAD mechanism study and a six-second standing test in MuJoCo.">
+<title>StrideForge: design and first simulation · Sai Kham Hein</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+.subtitle { margin-top:-18px; font-size:21px; line-height:1.5; color:var(--metadata); }
+.date { font-size:12px; color:var(--metadata); margin-bottom:26px; }
+.project-note { border:1px solid var(--rule); padding:20px 24px; margin:28px 0 36px; }
+.project-note p { font-size:16px; margin:0; }
+.project-note strong { color:var(--heading); }
+figure { margin:38px 0 42px; break-inside:avoid; }
+figure img { display:block; width:100%; height:auto; }
+figcaption { font-size:13px; line-height:1.6; color:var(--metadata); margin-top:14px; }
+article p a { text-underline-offset:4px; text-decoration-color:var(--underline); }
+@media(max-width:760px) { .subtitle {font-size:18px; margin-top:-10px;} .project-note {padding:18px;} .project-note p {font-size:15px;} }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#post">Skip to article</a>
+<header class="site-header">
+  <a class="name" href="../../">Sai Kham Hein</a>
+  <nav aria-label="Main navigation"><a href="../../">About</a></nav>
+</header>
+<main id="post" tabindex="-1">
+<article aria-labelledby="post-title">
+<div class="meta">Project notes / Robotics</div>
+<h1 id="post-title">StrideForge</h1>
+<p class="subtitle">Quadruped design and a first standing simulation</p>
+<p class="date"><time datetime="2026-10-15">15 October 2026</time></p>
+<aside class="project-note" aria-label="Project availability">
+<p><strong>Ongoing project.</strong> This is an ongoing hobby project. The design files and code aren’t public yet. If there’s enough interest, I’ll consider releasing them.</p>
+</aside>
+<p>I’m working on StrideForge to learn more about legged robots and simulation. The work so far covers the leg mechanism, a four-legged CAD assembly and a standing test in MuJoCo. The physical robot is still to be built.</p>
+<p>I’m keeping a <a href="https://strideforge-build-journal.saikhamhein.chatgpt.site">public build journal</a> with the design revisions, images and simulation results.</p>
+<figure>
+<img src="mujoco-standing.png" width="1200" height="900" alt="StrideForge Q8 quadruped model standing on four feet in a MuJoCo simulation.">
+<figcaption>The Q8 leg assembly and B2 body model in MuJoCo during the standing test.</figcaption>
+</figure>
+<h2>Leg mechanism</h2>
+<p>Each leg has three AK45-36 actuators: hip roll, hip pitch and knee. That gives the quadruped 12 actuated joints. The latest revision has separate left and right leg assemblies, with both knees folding rearward.</p>
+<p>The thigh and shin each have 160 mm between joint centres. Short 3D-printed end fittings connect to purchased 20 × 20 × 80 mm aluminium profiles using standard fasteners. I’m using vendor-derived motor housings and output parts in FreeCAD to study the mechanism and how the parts fit together.</p>
+<h2>From CAD to simulation</h2>
+<p>The current model has URDF and MuJoCo versions with a floating base. Its estimated mass is 8.731 kg. The simulation uses idealised actuators within the documented limits; the motor behaviour will need checking against measurements from a physical unit.</p>
+<p>The latest standing test ran for six seconds with all four feet in contact with the ground. Peak joint torque was 4.596 N·m under an 8 N·m simulation cap, and the maximum body tilt was 1.87°.</p>
+<p>This gives me an initial check of the assembled model, contacts and standing control. Walking-policy training is the next stage.</p>
+<h2>What comes next</h2>
+<p>I’ll work on reinforcement-learning walking in MuJoCo and use those results to review the model and control setup. Before buying a full set of actuators, I plan to test one physical motor and use the measurements for system identification.</p>
+<p>The <a href="https://strideforge-build-journal.saikhamhein.chatgpt.site">build journal</a> has the current progress and earlier design revisions.</p>
+<footer class="article-footer">
+<nav class="links" aria-label="More from Sai">
+<a href="https://strideforge-build-journal.saikhamhein.chatgpt.site">StrideForge build journal</a>
+<a href="../../">About Sai</a>
+</nav>
+<div class="end">Sai Kham Hein</div>
+</footer>
+</article>
+</main>
+</body>
+</html>
