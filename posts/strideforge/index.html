@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="StrideForge project notes: a quadruped leg design, FreeCAD mechanism study and a six-second standing test in MuJoCo.">
-<title>StrideForge: design and first simulation · Sai Kham Hein</title>
+<meta name="description" content="StrideForge project notes: quadruped design, MuJoCo walking and a first dog-motion imitation training run, with video.">
+<title>StrideForge: design and first imitation training · Sai Kham Hein</title>
 <link rel="stylesheet" href="../../styles.css">
 <style>
 .subtitle { margin-top:-18px; font-size:21px; line-height:1.5; color:var(--metadata); }
@@ -14,6 +14,7 @@
 .project-note p { font-size:16px; margin:0; }
 .project-note strong { color:var(--heading); }
 figure { margin:38px 0 42px; break-inside:avoid; }
+figure video { display:block; width:100%; height:auto; background:#202020; }
 figure img { display:block; width:100%; height:auto; }
 figcaption { font-size:13px; line-height:1.6; color:var(--metadata); margin-top:14px; }
 article p a { text-underline-offset:4px; text-decoration-color:var(--underline); }
@@ -30,12 +31,12 @@ article p a { text-underline-offset:4px; text-decoration-color:var(--underline);
 <article aria-labelledby="post-title">
 <div class="meta">Project notes / Robotics</div>
 <h1 id="post-title">StrideForge</h1>
-<p class="subtitle">Quadruped design and a first standing simulation</p>
-<p class="date"><time datetime="2026-10-15">15 October 2026</time></p>
+<p class="subtitle">Quadruped design and a first imitation-training run</p>
+<p class="date"><time datetime="2026-10-15">15 October 2026</time> · Updated <time datetime="2026-10-16">16 October 2026</time></p>
 <aside class="project-note" aria-label="Project availability">
 <p><strong>Ongoing project.</strong> This is an ongoing hobby project. The design files and code aren’t public yet. If there’s enough interest, I’ll consider releasing them.</p>
 </aside>
-<p>I’m working on StrideForge to learn more about legged robots and simulation. The work so far covers the leg mechanism, a four-legged CAD assembly and a standing test in MuJoCo. The physical robot is still to be built.</p>
+<p>I’m working on StrideForge to learn more about legged robots and simulation. The work now covers the leg mechanism, a four-legged CAD assembly, learned walking in MuJoCo and a first training run using a dog-motion reference. The physical robot is still to be built.</p>
 <p>I’m keeping a <a href="https://strideforge-build-journal.saikhamhein.chatgpt.site">public build journal</a> with the design revisions, images and simulation results.</p>
 <figure>
 <img src="mujoco-standing.png" width="1200" height="900" alt="StrideForge Q8 quadruped model standing on four feet in a MuJoCo simulation.">
@@ -45,12 +46,24 @@ article p a { text-underline-offset:4px; text-decoration-color:var(--underline);
 <p>Each leg has three AK45-36 actuators: hip roll, hip pitch and knee. That gives the quadruped 12 actuated joints. The latest revision has separate left and right leg assemblies, with both knees folding rearward.</p>
 <p>The thigh and shin each have 160 mm between joint centres. Short 3D-printed end fittings connect to purchased 20 × 20 × 80 mm aluminium profiles using standard fasteners. I’m using vendor-derived motor housings and output parts in FreeCAD to study the mechanism and how the parts fit together.</p>
 <h2>From CAD to simulation</h2>
-<p>The current model has URDF and MuJoCo versions with a floating base. Its estimated mass is 8.731 kg. The simulation uses idealised actuators within the documented limits; the motor behaviour will need checking against measurements from a physical unit.</p>
-<p>The latest standing test ran for six seconds with all four feet in contact with the ground. Peak joint torque was 4.596 N·m under an 8 N·m simulation cap, and the maximum body tilt was 1.87°.</p>
-<p>This gives me an initial check of the assembled model, contacts and standing control. Walking-policy training is the next stage.</p>
+<p>The standing model has URDF and MuJoCo versions with a floating base. Its estimated mass is 8.731 kg. The simulation uses idealised actuators within the documented limits; the motor behaviour will need checking against measurements from a physical unit.</p>
+<p>The earlier B2 standing test ran for six seconds with all four feet in contact with the ground. Peak joint torque was 4.596 N·m under an 8 N·m simulation cap, and the maximum body tilt was 1.87°.</p>
+<p>That gave me an initial check of the assembled model, contacts and standing control. I then moved on to the B3 walking model and PPO training.</p>
+<h2>16 October: first dog-motion imitation run</h2>
+<p>The first imitation-training run is complete. I used the B3 MuJoCo model and a retargeted dog-trot reference, with PPO learning small joint-target corrections around the reference controller. This follows the earlier reward-only walking policy.</p>
+<p>The run collected 1,001,472 transitions in about 18 minutes on CPU. The logged mean episode return rose from −4.49 to 56.90, and the final mean episode length reached the full 20-second limit. Those are training statistics; they don’t by themselves show how closely the robot follows the dog motion.</p>
+<figure>
+<video controls preload="metadata" playsinline poster="imitation-preview.jpg" width="1920" height="1080" aria-label="Ten-second MuJoCo preview from the first dog-motion imitation training run">
+<source src="imitation-161020260320.mp4" type="video/mp4">
+Your browser does not support embedded video. <a href="imitation-161020260320.mp4">Download the MP4</a>.
+</video>
+<figcaption>A 10-second simulation preview supplied with the first imitation run, at 1080p and 50 fps. <a href="imitation-161020260320.mp4">Open the MP4</a>.</figcaption>
+</figure>
+<p>A separate 20-second check with the recorded training controller settings reached 3.39 m, averaging 0.170 m/s without falling. It is still below the reference’s 0.223 m/s, and foot lift is uneven, particularly at the rear. Repeating the same fixed-start check gave the same trajectory, so this doesn’t establish robustness to different starts or disturbances.</p>
+<p>The motion reference comes from <a href="https://github.com/erwincoumans/motion_imitation">motion_imitation</a> / <a href="https://github.com/sebastianstarke/AI4Animation">AI4Animation</a>, with source motion data licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</p>
 <h2>What comes next</h2>
-<p>I’ll work on reinforcement-learning walking in MuJoCo and use those results to review the model and control setup. Before buying a full set of actuators, I plan to test one physical motor and use the measurements for system identification.</p>
-<p>The <a href="https://strideforge-build-journal.saikhamhein.chatgpt.site">build journal</a> has the current progress and earlier design revisions.</p>
+<p>I’ll use this first result to improve foot clearance and reference tracking, then check more varied starting states. The physical robot is still to be built. Before buying a full set of actuators, I plan to test one motor and use the measurements for system identification.</p>
+<p>The <a href="https://strideforge-build-journal.saikhamhein.chatgpt.site#b3-imitation-v1">build journal</a> has the run settings, measured results and earlier design revisions.</p>
 <footer class="article-footer">
 <nav class="links" aria-label="More from Sai">
 <a href="https://strideforge-build-journal.saikhamhein.chatgpt.site">StrideForge build journal</a>
